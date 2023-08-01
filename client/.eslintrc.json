@@ -15,7 +15,11 @@
     "sourceType": "module"
   },
   "plugins": ["@typescript-eslint", "react", "prettier"],
-  "rules": {},
+  "rules": {
+    "react/jsx-uses-vars": "error",
+    "react/jsx-uses-react": "error",
+    "@typescript-eslint/no-explicit-any": ["off"]
+  },
   "settings": {
     "import/resolver": {
       "typescript": {}
