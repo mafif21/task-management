@@ -13,7 +13,7 @@ export const TaskHeader: FC<ITaskHeader> = (
     <Box
       display="flex"
       justifyContent="space-between"
-      mb={4}
+      mb={3}
       width="100%"
     >
       <Box>
