@@ -1,12 +1,10 @@
-import express, {
-  Express,
-  Response,
-  Request,
-} from 'express';
+import express, { Express } from 'express';
 import { DataSource } from 'typeorm';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import { Task } from './src/tasks/tasks.entity';
+import { MainRouter } from './src/mainRouter';
 
 const app: Express = express();
 dotenv.config();
@@ -20,10 +18,6 @@ app.use(cors());
 // PORT
 const port = 4000 || process.env.PORT;
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('hello world');
-});
-
 const AppDataSource = new DataSource({
   type: 'mysql',
   host: 'localhost',
@@ -31,8 +25,11 @@ const AppDataSource = new DataSource({
   username: process.env.DATABASE_USERNAME,
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_NAME,
+  entities: [Task],
   synchronize: true,
 });
+
+app.use('/api', MainRouter);
 
 AppDataSource.initialize()
   .then(() => {
